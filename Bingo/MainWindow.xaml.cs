@@ -21,6 +21,9 @@ namespace Bingo
     public partial class MainWindow : Window
     {
         BingoData data = new BingoData();
+        Random random = new Random();
+        List<int> rand;
+        int Counter;
         public MainWindow()
         {
             InitializeComponent();
@@ -108,6 +111,7 @@ namespace Bingo
         }
         private void TabControl_Loaded(object sender, RoutedEventArgs e)
         {
+            rand = Enumerable.Range(1, 75).OrderBy(x => random.Next()).ToList();
             data.FillPlayers();
         }
 
@@ -150,16 +154,31 @@ namespace Bingo
             }
             ComboBox1.IsEnabled = false;
             Play.IsEnabled = false;
-            
+            Call.IsEnabled = true;
         }
-
-       
+        
+        private void Call_Click(object sender, RoutedEventArgs e)
+        {
+            if(Counter >= rand.Count)
+            {
+                MessageBox.Show("Todos los números han sido jugados");
+                return;
+            }
+            NumberBox.Text = "" + data.AssignLetter(rand[Counter]) + "-" + rand[Counter];
+            MarkGrid(rand[Counter]);
+            Counter++;
+        }
+        private void MarkGrid(int N)
+        {
+            data.Find(N);
+        }
     }
+   
     public class BingoData
     {
         public int[,,] Players = new int[4, 5, 5];
         public bool[,,] Marked = new bool[4, 5, 5];
-        private void Find(int N)
+        public void Find(int N)
         {
             int col = FindColumn(N);
             for(int k = 0; k < 4; k++)
@@ -173,6 +192,29 @@ namespace Bingo
                 }
             }
             
+        }
+        public char AssignLetter(int N)
+        {
+            if (N > 0 && N < 16)
+            {
+                return 'B';
+            }
+            else if (N > 15 && N < 31)
+            {
+                return 'I';
+            }
+            else if (N > 30 && N < 46)
+            {
+                return 'N';
+            }
+            else if (N > 45 && N < 61)
+            {
+                return 'G';
+            }
+            else
+            {
+                return 'O';
+            }
         }
         private int FindColumn(int N)
         {

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Bingo"
         mc:Ignorable="d"
         Title="MainWindow" Height="548" Width="805.5">
-    <TabControl Name="BingoPlays" HorizontalAlignment="Left" Height="516" VerticalAlignment="Top" Width="796" Loaded="TabControl_Loaded" SelectionChanged="BingoPlays_SelectionChanged">
+    <TabControl Name="BingoPlays" HorizontalAlignment="Left" Height="516" VerticalAlignment="Top" Width="796" Loaded="TabControl_Loaded" >
         <TabItem Header="Play">
             <Grid HorizontalAlignment="Left" Height="388" VerticalAlignment="Top" Width="673" Margin="44,31,0,0">
                 <ComboBox Name="ComboBox1" Width="200" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,28,0,0">
@@ -17,7 +17,9 @@
 
                 </ComboBox>
                 <Button Height="23" x:Name="Play"  Click="Play_Click" Margin="262,82,312,282" Content="Play"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="262,187,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="99"/>
+                <TextBox x:Name="NumberBox" HorizontalAlignment="Left" Height="37" Margin="262,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="111" FontSize="20" FontWeight="Bold"/>
+                
+                <Button x:Name="Call" Content="Call" Click="Call_Click" HorizontalAlignment="Left" Margin="262,270,0,0" VerticalAlignment="Top" Width="99" IsEnabled="False"/>
             </Grid>
         </TabItem>
         <TabItem x:Name="Player1" Header="Player1" RenderTransformOrigin="1.574,0.364" IsEnabled="False">
